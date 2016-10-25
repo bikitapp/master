@@ -1,0 +1,50 @@
+{
+    "private": false,
+    "nativescript": {
+        "id": "org.nativescript.nativescriptmapsapp"
+    },
+    "name": "nativescript-maps-app",
+    "main": "main.js",
+    "version": "0.0.3",
+    "author": "Nick Coury <nickcoury@gmail.com>",
+    "description": "Nativescript Angular Google Maps App",
+    "license": "MIT",
+    "keywords": [
+        "telerik",
+        "mobile",
+        "angular",
+        "nativescript",
+        "{N}",
+        "tns",
+        "appbuilder",
+        "template",
+        "google",
+        "maps",
+        "typescript"
+    ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/nickcoury/nativescript-maps-app.git"
+  },
+  "homepage": "https://github.com/nickcoury/nativescript-maps-app",
+  "android": {
+    "v8Flags": "--expose_gc"
+  },
+    "dependencies": {
+        "nativescript-angular": "1.0.0",
+        "@angular/core": "2.0.0",
+        "@angular/common": "2.0.0",
+        "@angular/compiler": "2.0.0",
+        "@angular/http": "2.0.0",
+        "@angular/platform-browser": "2.0.0",
+        "@angular/platform-browser-dynamic": "2.0.0",
+        "@angular/platform-server": "2.0.0",
+        "@angular/forms": "2.0.0",
+        "@angular/router": "3.0.0",
+        "reflect-metadata": "^0.1.8"
+    },
+    "devDependencies": {
+        "zone.js": "^0.6.21",
+        "nativescript-dev-typescript": "^0.3.2"
+    }
+}

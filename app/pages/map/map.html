@@ -1,0 +1,53 @@
+<RadSideDrawer #drawer drawerLocation="Left">
+    <StackLayout tkDrawerContent>
+      <GridLayout rows="*, auto">
+        <StackLayout row="0">
+          <Image src="res://icon" cssClass="header-image" stretch="aspectFit" ></Image>
+          <Label cssClass="divider"></Label>
+          <Label (tap)="closeDrawer()" text="Ver mapa" cssClass="button" ></Label>
+          <Label cssClass="button-divider"></Label>
+          <Label (tap)="clearGpsLine()" text="Borrar línea Gps" cssClass="button" ></Label>
+          <Label cssClass="button-divider"></Label>
+          <Label (tap)="clearTapLine()" text="Borrar línea dibujada" cssClass="button" ></Label>
+          <Label cssClass="button-divider"></Label>
+        </StackLayout>
+        <StackLayout row="1">
+          <Label text="Created with Nativescript" tap="goToUrl" tag="http://www.nativescript.org" ></Label>
+        </StackLayout>
+      </GridLayout>
+    </StackLayout>
+
+    <StackLayout tkMainContent>
+        <AbsoluteLayout width="100%" height="60%">
+            <MapView top="0" left="0" width="100%" height="100%" (mapReady)="onMapReady($event)" (coordinateTapped)="mapTapped($event)"></MapView>
+            <Image (tap)="openDrawer()" top="20" left="20" src="res://icon" cssClass="menu-button"></Image>
+        </AbsoluteLayout>
+
+        <StackLayout width="100%" height="40%">
+
+            <StackLayout orientation="horizontal">
+              <StackLayout orientation="vertical">
+                <StackLayout orientation="horizontal">
+                  <Label text="Inicio: " backgroundColor="red"></Label>
+                  <Label text="Dirección de inicio" backgroundColor="blue"></Label>
+              </StackLayout>
+              <StackLayout orientation="horizontal">
+                <Label text="Termino: " backgroundColor="red"></Label>
+                <Label text="Dirección de termino" backgroundColor="blue"></Label>
+              </StackLayout>
+              </StackLayout>
+              <StackLayout orientation="vertical">
+                <Image (tap)="openDrawer()" top="20" left="20" src="res://icon" cssClass="menu-button"></Image>
+
+              </StackLayout>
+            </StackLayout>
+
+            <StackLayout orientation="horizontal" >
+                <Button row="0" text="Iniciar viaje" (tap)="buttonStartTap($event)"> </Button>
+                <Button row="1" text="Detener viaje" (tap)="buttonStopTap($event)"> </Button>
+            </StackLayout>
+
+        </StackLayout>
+
+    </StackLayout>
+</RadSideDrawer>
