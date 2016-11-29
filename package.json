@@ -10,7 +10,10 @@
   "author": "WEDIT",
   "homepage": "http://www.bikit.cl",
   "nativescript": {
-    "id": "com.bikit.bikitapp"
+    "id": "com.bikit.bikitapp",
+    "tns-android": {
+      "version": "2.3.0"
+    }
   },
   "scripts": {
     "tslint": "tslint \"app/**/*.ts\""
