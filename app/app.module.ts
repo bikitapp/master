@@ -8,7 +8,7 @@ import { NativeScriptRouterModule } from "nativescript-angular/router";
 import { authProviders, appRoutes } from "./app.routing";
 
 //App Components
-import { SIDEDRAWER_DIRECTIVES } from "nativescript-telerik-ui/sidedrawer/angular";
+//import { SIDEDRAWER_DIRECTIVES } from "nativescript-telerik-ui/sidedrawer/angular";
 import { AppComponent } from "./app.component";
 import { setStatusBarColors, BackendService, LoginService } from "./shared";
 import { LoginModule } from "./pages/login/login.module";
@@ -40,7 +40,7 @@ setStatusBarColors();
     MapModule
   ],
   declarations: [
-      SIDEDRAWER_DIRECTIVES,
+      //SIDEDRAWER_DIRECTIVES,
       AppComponent,
   ],
   bootstrap: [AppComponent]

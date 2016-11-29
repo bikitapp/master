@@ -1,0 +1,21 @@
+// Add your native dependencies here:
+
+project.ext {
+    // Uncomment below to change Google Play Services Version
+    googlePlayServicesVersion = "9.8.+"
+}
+
+// Uncomment to add recyclerview-v7 dependency
+//dependencies {
+//	compile 'com.android.support:recyclerview-v7:+'
+//}
+
+android {
+  defaultConfig {
+    generatedDensities = []
+    applicationId = "com.bikit.bikitapp"
+  }
+  aaptOptions {
+    additionalParameters "--no-version-vectors"
+  }
+}
