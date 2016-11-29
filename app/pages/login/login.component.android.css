@@ -1,0 +1,24 @@
+.main-container {
+  height: 100%;
+  width: 350;
+}
+
+TextField {
+  margin-bottom: 10;
+}
+
+.submit-button {
+  margin-top: 15;
+}
+
+.toogle-button {
+  margin-top: 0;
+}
+
+.forgot-password-label {
+  font-size: 13;
+}
+.logo-container Image {
+  height: 100%;
+  width: 100%;
+}

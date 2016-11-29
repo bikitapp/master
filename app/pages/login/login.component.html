@@ -1,0 +1,89 @@
+<GridLayout>
+
+  <GridLayout #background scaleX="1.4" scaleY="1.4" class="background" (loaded)="startBackgroundAnimation(background)"></GridLayout>
+
+  <StackLayout #initialContainer class="initial-container">
+    <Image src="res://logo_login" stretch="none" class="initial-logo"></Image>
+    <StackLayout (tap)="showMainContent()" class="initial-button">
+      <Label text="Ingresar" class="initial-button-label"></Label>
+    </StackLayout>
+  </StackLayout>
+
+  <StackLayout #mainContainer class="main-container" >
+    <AbsoluteLayout #logoContainer class="logo-container">
+      <Image src="res://logo_login" stretch="aspectFit"></Image>
+    </AbsoluteLayout>
+
+    <GridLayout #formControls class="form-controls" rows="auto, auto" translateY="20">
+      <TextField #email hint="Correo electrónico" class="camposLogin" keyboardType="email" returnKeyType="next" (returnPress)="focusPassword()" [(ngModel)]="user.email"
+        [isEnabled]="!isAuthenticating"
+        autocorrect="false"
+        autocapitalizationType="none"
+        row="0"></TextField>
+      <TextField #password
+        hint="Password"
+        class="camposLogin"
+        secure="true"
+        returnKeyType="done"
+        (returnPress)="submit()"
+        [(ngModel)]="user.password"
+        [isEnabled]="!isAuthenticating"
+        row="1"></TextField>
+
+      <ActivityIndicator [busy]="isAuthenticating" rowSpan="2"></ActivityIndicator>
+    </GridLayout>
+
+    <GridLayout #signupControls class="form-controls" rows="auto, auto, auto, auto" translateY="20">
+      <TextField #nombre hint="Nombre completo" class="camposLogin" returnKeyType="next" (returnPress)="focusPassword()" [(ngModel)]="user.nombre"
+        [isEnabled]="!isAuthenticating"
+        autocorrect="false"
+        autocapitalizationType="none"
+        row="0"></TextField>
+      <TextField #email hint="Correo electrónico" class="camposLogin" keyboardType="email" returnKeyType="next" (returnPress)="focusPassword()" [(ngModel)]="user.email"
+        [isEnabled]="!isAuthenticating"
+        autocorrect="false"
+        autocapitalizationType="none"
+        row="1"></TextField>
+      <TextField #password
+        hint="Password"
+        class="camposLogin"
+        secure="true"
+        returnKeyType="done"
+        (returnPress)="submit()"
+        [(ngModel)]="user.password"
+        [isEnabled]="!isAuthenticating"
+        row="2"></TextField>
+        <TextField #nacimiento
+          hint="Cumpleaños"
+          class="camposLogin"
+          keyboardType="datetime"
+          returnKeyType="done"
+          (returnPress)="submit()"
+          [(ngModel)]="user.nacimiento"
+          [isEnabled]="!isAuthenticating"
+          row="3"></TextField>
+
+      <ActivityIndicator [busy]="isAuthenticating" rowSpan="2"></ActivityIndicator>
+    </GridLayout>
+
+    <Button [text]="isLoggingIn ? 'Login' : 'Registrate'" [isEnabled]="!isAuthenticating" class="submit-button" (tap)="submit()"></Button>
+    <Button [text]="isLoggingIn ? 'Registro' : 'Volver 1'" (tap)="toggleDisplay()"  class="toogle-button" ></Button>
+
+    <Label class="forgot-password-label" text="¿Olvidaste tu contraseña?" (tap)="forgotPassword()" [opacity]="isLoggingIn ? 1 : 0" [visibility]="isLoggingIn ? 'visible' : 'collapse'" ></Label>
+
+    <Label class="social-singin-label" text="También puedes ingresar con tus cuentas de:" ></Label>
+
+    <StackLayout class="social-container" orientation="horizontal" horizontalAlignment="center" verticalAlignment="center" >
+      <Image src="res://social_facebook" stretch="aspectFit" width="60" height="60" ></Image>
+      <Image src="res://social_googleplus" stretch="aspectFit" width="60" height="60" (tap)="googleSignin" ></Image>
+      <!--Image src="res://social_twitter" stretch="aspectFit" width="60" height="60"  ></Image-->
+
+    </StackLayout>
+
+    <StackLayout #signUpStack class="sign-up-stack">
+
+    </StackLayout>
+
+  </StackLayout>
+
+</GridLayout>

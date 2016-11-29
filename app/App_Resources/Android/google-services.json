@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "1062457871967",
+    "firebase_url": "https://bikitapp-3b3d5.firebaseio.com",
+    "project_id": "bikitapp-3b3d5",
+    "storage_bucket": "bikitapp-3b3d5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1062457871967:android:a87ab42d1577e032",
+        "android_client_info": {
+          "package_name": "com.bikit.bikitapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1062457871967-f98a2h4d64ebvjtjrkq52r0q7ljig14n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBaa9DC3sIpO8KoDuPI4RFn1D8LPADqAFA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

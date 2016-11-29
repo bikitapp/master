@@ -1,0 +1,17 @@
+android {
+  defaultConfig {
+    generatedDensities = []
+    // added these:
+    multiDexEnabled true
+    applicationId "com.bikit.bikitapp"
+  }
+
+  // after adding a few additional Firebase libs we'll need this (otherwise: OutOfMemoryException)
+  dexOptions {
+    javaMaxHeapSize "4g"
+  }
+
+  aaptOptions {
+    additionalParameters "--no-version-vectors"  
+  }
+}
