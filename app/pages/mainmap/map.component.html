@@ -4,24 +4,58 @@
         <StackLayout row="0">
           <Image src="res://icon" cssClass="header-image" stretch="aspectFit" ></Image>
           <Label cssClass="divider"></Label>
-          <Label (tap)="closeDrawer()" text="Map View" cssClass="button" ></Label>
+          <Label (tap)="closeDrawer()" text="Vista del mapa" cssClass="button" ></Label>
           <Label cssClass="button-divider"></Label>
-          <Label (tap)="clearGpsLine()" text="Clear Gps Line" cssClass="button" ></Label>
+          <Label (tap)="clearGpsLine()" text="Borrar último viaje" cssClass="button" ></Label>
           <Label cssClass="button-divider"></Label>
-          <Label (tap)="clearTapLine()" text="Clear Drawn Line" cssClass="button" ></Label>
+          <Label (tap)="clearTapLine()" text="Borrar línea dibujada" cssClass="button" ></Label>
           <Label cssClass="button-divider"></Label>
-        </StackLayout>
-        <StackLayout row="1">
-          <Label text="Created with Nativescript" tap="goToUrl" tag="http://www.nativescript.org" ></Label>
+          <Label (tap)="logoff()" text="Cerrar sesión" cssClass="button" ></Label>
+          <Label cssClass="button-divider"></Label>
         </StackLayout>
       </GridLayout>
     </StackLayout>
     <StackLayout tkMainContent>
-        <AbsoluteLayout width="100%" height="100%">
+        <AbsoluteLayout width="100%" height="65%">
             <MapView top="0" left="0" width="100%" height="100%" (mapReady)="onMapReady($event)" (coordinateTapped)="mapTapped($event)"></MapView>
-            <Image (tap)="openDrawer()" top="20" left="20" src="res://icon" cssClass="menu-button"></Image>
+            <!--Image (tap)="openDrawer()" top="20" left="20" src="res://icon" cssClass="menu-button"></Image-->
             <Label top="0" left="0" width="2%" height="100%" text=" "></Label>
         </AbsoluteLayout>
+        <StackLayout width="100%" height="25%" backgroundColor="blue">
+
+            <StackLayout orientation="horizontal" backgroundColor="yellow">
+              <StackLayout orientation="vertical">
+                <StackLayout orientation="horizontal">
+                  <Label text="Inicio: " backgroundColor="red"></Label>
+                  <Label text="Dirección de inicio" backgroundColor="blue"></Label>
+                </StackLayout>
+                <StackLayout orientation="horizontal">
+                  <Label text="Termino: " backgroundColor="red"></Label>
+                  <Label text="Dirección de termino" backgroundColor="blue"></Label>
+                </StackLayout>
+              </StackLayout>
+              <!--StackLayout orientation="vertical">
+                <Image (tap)="openDrawer()" top="20" left="20" src="res://icon" cssClass="menu-button"></Image>
+
+              </StackLayout-->
+            </StackLayout>
+
+            <StackLayout orientation="horizontal" horizontalAlignment="center" verticalAlignment="center" width="100%" height="100%" backgroundColor="black">
+              <StackLayout verticalAlignment="center">
+                <Label text="30 km" backgroundColor="blue" verticalAlignment="bottom" ></Label>
+                <Label text="Duración" backgroundColor="blue" verticalAlignment="bottom" ></Label>
+              </StackLayout>
+              <Image (tap)="openDrawer()" top="20" left="20" src="res://icon" cssClass="viaje-button" stretch="aspectFit"></Image>
+              <StackLayout verticalAlignment="center" >
+                <Label text="8 mins" backgroundColor="blue" verticalAlignment="bottom" ></Label>
+                <Label text="Distancia" backgroundColor="blue" verticalAlignment="bottom" ></Label>
+              </StackLayout>
+
+                <!--Button row="0" text="Iniciar viaje" (tap)="buttonStartTap($event)"> </Button>
+                <Button row="1" text="Detener viaje" (tap)="buttonStopTap($event)"> </Button-->
+            </StackLayout>
+
+        </StackLayout>
     </StackLayout>
 
 </RadSideDrawer>

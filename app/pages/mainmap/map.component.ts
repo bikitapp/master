@@ -1,17 +1,22 @@
 import {Component, ViewChild, AfterViewInit} from '@angular/core';
 import {registerElement} from 'nativescript-angular/element-registry';
+import { Router } from "@angular/router";
+
 let geolocation = require('nativescript-geolocation');
 import {MapView, Marker, Polyline, Position} from 'nativescript-google-maps-sdk';
 
+import { Page } from "ui/page";
 import {RadSideDrawer} from 'nativescript-telerik-ui/sidedrawer';
 import sideDrawerModule = require('nativescript-telerik-ui/sidedrawer');
 import {RadSideDrawerComponent, SideDrawerType} from 'nativescript-telerik-ui/sidedrawer/angular';
+import {Config} from "../../shared/config";
+import firebase = require("nativescript-plugin-firebase");
+
+import { LoginService, alert } from "../../shared";
 
 import {Color} from 'color';
 var style = require("./mapstyle.json");
 
-
-console.log('Registering MapView');
 registerElement('MapView', () => MapView);
 
 let vm;
@@ -30,8 +35,14 @@ export class MapComponent implements AfterViewInit {
     gpsMarker:any;
     centeredOnLocation:boolean = false;
 
-    constructor() {
-        vm = this;
+    constructor(private router: Router,
+      private page: Page,
+      private loginService: LoginService) {
+          vm = this;
+    }
+
+    ngOnInit() {
+      this.page.actionBarHidden = true;
     }
 
     @ViewChild(RadSideDrawerComponent) public drawerComponent: RadSideDrawerComponent;
@@ -51,7 +62,6 @@ export class MapComponent implements AfterViewInit {
 
     enableLocation() {
         if (!geolocation.isEnabled()) {
-            console.log('Location not enabled, requesting.');
             return geolocation.enableLocationRequest();
         } else {
             return Promise.resolve(true);
@@ -67,7 +77,7 @@ export class MapComponent implements AfterViewInit {
                 maximumAge: 10000
             })
         }
-        return Promise.reject('Geolocation not enabled.');
+        return Promise.reject('GPS no habilitado.');
     }
 
     //Map events
@@ -202,6 +212,11 @@ export class MapComponent implements AfterViewInit {
 
     onCameraChanged(event) {
         console.log('Camera changed: ' + JSON.stringify(event.camera));
+    }
+    logoff() {
+      Config.invalidateToken();
+      firebase.logout();
+      this.router.navigate(["/login"]);
     }
 }
 

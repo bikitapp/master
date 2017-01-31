@@ -48,8 +48,7 @@
         hint="Password"
         class="camposLogin"
         secure="true"
-        returnKeyType="done"
-        (returnPress)="submit()"
+        returnKeyType="next"
         [(ngModel)]="user.password"
         [isEnabled]="!isAuthenticating"
         row="2"></TextField>
@@ -67,7 +66,7 @@
     </GridLayout>
 
     <Button [text]="isLoggingIn ? 'Login' : 'Registrate'" [isEnabled]="!isAuthenticating" class="submit-button" (tap)="submit()"></Button>
-    <Button [text]="isLoggingIn ? 'Registro' : 'Volver 1'" (tap)="toggleDisplay()"  class="toogle-button" ></Button>
+    <Button [text]="isLoggingIn ? 'Registro' : 'Volver'" (tap)="toggleDisplay()"  class="toogle-button" ></Button>
 
     <Label class="forgot-password-label" text="¿Olvidaste tu contraseña?" (tap)="forgotPassword()" [opacity]="isLoggingIn ? 1 : 0" [visibility]="isLoggingIn ? 'visible' : 'collapse'" ></Label>
 
@@ -75,7 +74,7 @@
 
     <StackLayout class="social-container" orientation="horizontal" horizontalAlignment="center" verticalAlignment="center" >
       <Image src="res://social_facebook" stretch="aspectFit" width="60" height="60" ></Image>
-      <Image src="res://social_googleplus" stretch="aspectFit" width="60" height="60" (tap)="googleSignin" ></Image>
+      <Image src="res://social_googleplus" stretch="aspectFit" width="60" height="60" (tap)="googleSignin()" ></Image>
       <!--Image src="res://social_twitter" stretch="aspectFit" width="60" height="60"  ></Image-->
 
     </StackLayout>

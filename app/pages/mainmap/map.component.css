@@ -1,14 +1,22 @@
 RadSideDrawer Label {
-    color: white;
+    color: #4A4A4A;
     font-size: 16px;
     padding: 10px;
     text-align: center;
 }
 
 RadSideDrawer Label.divider {
-    background-color: white;
+    background-color: #4A4A4A;
     width: 90%;
     height: 1px;
+    padding: 10px;
+
+}
+
+RadSideDrawer Label.divider-vertical {
+    background-color: #4A4A4A;
+    height: 90%;
+    width: 1px;
 }
 
 RadSideDrawer Label.button-divider {
@@ -19,14 +27,14 @@ RadSideDrawer Label.button-divider {
 
 RadSideDrawer Label.button {
     background-color: none;
-    color: white;
+    color: #4A4A4A;
     font-size: 24;
     text-align: center;
     padding: 10px;
 }
 
 RadSideDrawer StackLayout {
-    background-color: #0088ff;
+    background-color: #e3e3e3;
 }
 
 RadSideDrawer Image.header-image {
@@ -38,4 +46,9 @@ RadSideDrawer Image.header-image {
 AbsoluteLayout Image.menu-button {
     width: 48px;
     height: 48px;
+}
+
+.viaje-button {
+    width: 100px;
+    height: 100px;
 }

@@ -1,5 +1,5 @@
 import { platformNativeScriptDynamic, NativeScriptModule } from "nativescript-angular/platform";
-
+import geofire = require ("nativescript-geofire-plugin");
 import { enableProdMode } from '@angular/core';
 import { AppModule } from "./app.module";
 

@@ -28,18 +28,20 @@ export class LoginComponent implements OnInit {
   @ViewChild("formControls") formControls: ElementRef;
   @ViewChild("signupControls") signupControls: ElementRef;
   @ViewChild("signUpStack") signUpStack: ElementRef;
+  @ViewChild("nombre") nombre: ElementRef;
   @ViewChild("email") email: ElementRef;
   @ViewChild("password") password: ElementRef;
   @ViewChild("nacimiento") nacimiento: ElementRef;
-  @ViewChild("nombre") nombre: ElementRef;
 
 
   constructor(private router: Router,
     private userService: LoginService,
     private page: Page) {
     this.user = new User();
+    this.user.nombre;
     this.user.email;
     this.user.password;
+    this.user.nacimiento;
   }
 
   ngOnInit() {
@@ -153,8 +155,8 @@ export class LoginComponent implements OnInit {
             this.toggleSignin();
         } else {
             this.toggleSignup();
+            this.setTextFieldColors();
         }
-    this.setTextFieldColors();
 
   }
 
@@ -213,7 +215,7 @@ export class LoginComponent implements OnInit {
     nombreTextField.color = mainTextColor;
 
 
-    let hintColor = new Color(this.isLoggingIn ? "#ACA6A7" : "#C4AFB4");
+    let hintColor = new Color(this.isLoggingIn ? "#ACA6A7" : "#BBBBBB");
     setHintColor({ view: emailTextField, color: hintColor });
     setHintColor({ view: passwordTextField, color: hintColor });
     setHintColor({ view: nacimientoTextField, color: hintColor });
