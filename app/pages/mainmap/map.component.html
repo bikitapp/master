@@ -1,61 +1,49 @@
 <RadSideDrawer #drawer drawerLocation="Left">
-    <StackLayout tkDrawerContent>
-      <GridLayout rows="*, auto">
-        <StackLayout row="0">
-          <Image src="res://icon" cssClass="header-image" stretch="aspectFit" ></Image>
-          <Label cssClass="divider"></Label>
-          <Label (tap)="closeDrawer()" text="Vista del mapa" cssClass="button" ></Label>
-          <Label cssClass="button-divider"></Label>
-          <Label (tap)="clearGpsLine()" text="Borrar último viaje" cssClass="button" ></Label>
-          <Label cssClass="button-divider"></Label>
-          <Label (tap)="clearTapLine()" text="Borrar línea dibujada" cssClass="button" ></Label>
-          <Label cssClass="button-divider"></Label>
-          <Label (tap)="logoff()" text="Cerrar sesión" cssClass="button" ></Label>
-          <Label cssClass="button-divider"></Label>
+
+    <StackLayout tkDrawerContent >
+        <StackLayout class="sidedrawer-header">
+          <Image src="res://icon" cssClass="sidedrawer-header-image" stretch="aspectFit" ></Image>
         </StackLayout>
-      </GridLayout>
+        <StackLayout class="sidedrawer-content">
+            <GridLayout  rows="auto" columns="auto,*" pageName="main-page">
+              <Label text="{{'fa-home' }}" class="fa sidedrawer-list-item-icon" row="0" col="0"> </Label>
+              <Label text="Home" class="sidedrawer-list-item-text" row="0" col="1"> </Label>
+            </GridLayout>
+            <GridLayout rows="auto" columns="auto,*" pageName="basics">
+              <Label text="{{'fa-font'}}" class="fa sidedrawer-list-item-icon" row="0" col="0"> </Label>
+              <Label text="Basics" class="sidedrawer-list-item-text" row="0" col="1"> </Label>
+            </GridLayout>
+            <GridLayout rows="auto" columns="auto,*" pageName="buttons">
+              <Label text="{{'fa-square'}}" class="fa sidedrawer-list-item-icon" row="0" col="0"> </Label>
+              <Label text="Buttons" class="sidedrawer-list-item-text" row="0" col="1"> </Label>
+            </GridLayout>
+          </StackLayout>
     </StackLayout>
+
     <StackLayout tkMainContent>
-        <AbsoluteLayout width="100%" height="65%">
+        <StackLayout width="100%" height="60%" cssClass="mapa">
             <MapView top="0" left="0" width="100%" height="100%" (mapReady)="onMapReady($event)" (coordinateTapped)="mapTapped($event)"></MapView>
             <!--Image (tap)="openDrawer()" top="20" left="20" src="res://icon" cssClass="menu-button"></Image-->
             <Label top="0" left="0" width="2%" height="100%" text=" "></Label>
-        </AbsoluteLayout>
-        <StackLayout width="100%" height="25%" backgroundColor="blue">
-
-            <StackLayout orientation="horizontal" backgroundColor="yellow">
-              <StackLayout orientation="vertical">
-                <StackLayout orientation="horizontal">
-                  <Label text="Inicio: " backgroundColor="red"></Label>
-                  <Label text="Dirección de inicio" backgroundColor="blue"></Label>
-                </StackLayout>
-                <StackLayout orientation="horizontal">
-                  <Label text="Termino: " backgroundColor="red"></Label>
-                  <Label text="Dirección de termino" backgroundColor="blue"></Label>
-                </StackLayout>
-              </StackLayout>
-              <!--StackLayout orientation="vertical">
-                <Image (tap)="openDrawer()" top="20" left="20" src="res://icon" cssClass="menu-button"></Image>
-
-              </StackLayout-->
-            </StackLayout>
-
-            <StackLayout orientation="horizontal" horizontalAlignment="center" verticalAlignment="center" width="100%" height="100%" backgroundColor="black">
-              <StackLayout verticalAlignment="center">
-                <Label text="30 km" backgroundColor="blue" verticalAlignment="bottom" ></Label>
-                <Label text="Duración" backgroundColor="blue" verticalAlignment="bottom" ></Label>
-              </StackLayout>
-              <Image (tap)="openDrawer()" top="20" left="20" src="res://icon" cssClass="viaje-button" stretch="aspectFit"></Image>
-              <StackLayout verticalAlignment="center" >
-                <Label text="8 mins" backgroundColor="blue" verticalAlignment="bottom" ></Label>
-                <Label text="Distancia" backgroundColor="blue" verticalAlignment="bottom" ></Label>
-              </StackLayout>
-
-                <!--Button row="0" text="Iniciar viaje" (tap)="buttonStartTap($event)"> </Button>
-                <Button row="1" text="Detener viaje" (tap)="buttonStopTap($event)"> </Button-->
-            </StackLayout>
-
         </StackLayout>
+
+        <FlexboxLayout flexWrap="wrap" justifyContent="center" class="p-15" backgroundColor="lightgray">
+            <Label flexWrapBefore="true" text="00,00 km" borderRadius="5" backgroundColor="#F93822"
+                color="white" font-size="20"></Label>
+            <Label class="p-5 m-l-15 m-r-15 m-b-15 text-center" text="00 km/hr" borderRadius="5" backgroundColor="green" color="white"></Label>
+            <Label class="p-5 m-l-15 m-r-15 m-b-15 text-center" text="00:00" borderRadius="5" backgroundColor="#A6BBC8"></Label>
+            <Label class="p-5 m-l-15 m-r-15 m-b-15 text-center" text="Distancia" borderRadius="5" backgroundColor="#F93822" color="white"></Label>
+            <Label class="p-5 m-l-15 m-r-15 m-b-15 text-center" text="Velocidad" borderRadius="5" backgroundColor="green" color="white"></Label>
+            <Label class="p-5 m-l-15 m-r-15 m-b-15 text-center" text="Duración" borderRadius="5" backgroundColor="#A6BBC8"></Label>
+            <Label flexWrapBefore="true" class="p-5 m-l-15 m-r-15 m-b-15 text-center" text="S: High" borderRadius="5" backgroundColor="#F93822"
+                color="white"></Label>
+            <Label class="p-5 m-l-15 m-r-15 m-b-15 text-center" text="T: Phasellus" borderRadius="5" backgroundColor="green" color="white"></Label>
+            <Label class="p-5 m-l-15 m-r-15 m-b-15 text-center" text="Nullam" borderRadius="5" backgroundColor="#A6BBC8"></Label>
+            <Label class="p-5 m-l-15 m-r-15 m-b-15 text-center" text="T:Question" borderRadius="5" backgroundColor="#FFD900"></Label>
+            <Label class="p-5 m-l-15 m-r-15 m-b-15 text-center" text="S:Medium" borderRadius="5" backgroundColor="#FFD900"></Label>
+            <Label class="p-5 m-l-15 m-r-15 m-b-15 text-center" text="duplicate" borderRadius="5" backgroundColor="#A6BBC8"></Label>
+        </FlexboxLayout>
+
     </StackLayout>
 
 </RadSideDrawer>

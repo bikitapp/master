@@ -6,7 +6,7 @@ import { AppModule } from "./app.module";
 import firebase = require ("nativescript-plugin-firebase");
 
 firebase.init({
-
+  iOSEmulatorFlush: true
   }).then(
     (instance) =>{
         console.log("firebase iniciado");

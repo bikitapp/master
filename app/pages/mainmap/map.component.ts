@@ -5,7 +5,7 @@ import { Router } from "@angular/router";
 let geolocation = require('nativescript-geolocation');
 import {MapView, Marker, Polyline, Position} from 'nativescript-google-maps-sdk';
 
-import { Page } from "ui/page";
+import {Page} from "ui/page";
 import {RadSideDrawer} from 'nativescript-telerik-ui/sidedrawer';
 import sideDrawerModule = require('nativescript-telerik-ui/sidedrawer');
 import {RadSideDrawerComponent, SideDrawerType} from 'nativescript-telerik-ui/sidedrawer/angular';
@@ -15,6 +15,18 @@ import firebase = require("nativescript-plugin-firebase");
 import { LoginService, alert } from "../../shared";
 
 import {Color} from 'color';
+
+import {
+    FlexboxLayout,
+    FlexDirection,
+    FlexWrap,
+    JustifyContent,
+    AlignItems,
+    AlignContent,
+    AlignSelf
+} from "ui/layouts/flexbox-layout";
+
+
 var style = require("./mapstyle.json");
 
 registerElement('MapView', () => MapView);
@@ -74,7 +86,7 @@ export class MapComponent implements AfterViewInit {
                 desiredAccuracy: 10,
                 updateDistance: 10,
                 minimumUpdateTime: 1000,
-                maximumAge: 10000
+                maximumAge: 20000
             })
         }
         return Promise.reject('GPS no habilitado.');
@@ -97,8 +109,8 @@ export class MapComponent implements AfterViewInit {
                 vm.watchId = geolocation.watchLocation(vm.locationReceived, vm.error, {
                     desiredAccuracy: 10,
                     updateDistance: 10,
-                    minimumUpdateTime: 10000,
-                    maximumAge: 60000
+                    minimumUpdateTime: 20000,
+                    maximumAge: 200000
                 });
             }, vm.error);
     };
@@ -107,7 +119,7 @@ export class MapComponent implements AfterViewInit {
         console.log('Map Tapped');
 
         vm.tapLine = vm.addPointToLine({
-            color: new Color('Red'),
+            color: new Color('LightRed'),
             line: vm.tapLine,
             location: event.position,
             geodesic: true,
@@ -132,7 +144,7 @@ export class MapComponent implements AfterViewInit {
         }
 
         vm.gpsLine = vm.addPointToLine({
-            color: new Color('Green'),
+            color: new Color('LightGreen'),
             line: vm.gpsLine,
             location: position,
             geodesic: true,
@@ -142,7 +154,7 @@ export class MapComponent implements AfterViewInit {
         vm.removeMarker(vm.gpsMarker);
         vm.gpsMarker = vm.addMarker({
             location: position,
-            title: 'GPS Location'
+            title: 'Mi ubicación'
         });
     };
 
@@ -155,7 +167,7 @@ export class MapComponent implements AfterViewInit {
             line = new Polyline();
             line.visible = true;
             line.width = args.width || 10;
-            line.color = args.color || new Color('Red');
+            line.color = args.color || new Color('LightRed');
             line.geodesic = args.geodesic != undefined ? args.geodesic : true;
             vm.mapView.addPolyline(line);
         }

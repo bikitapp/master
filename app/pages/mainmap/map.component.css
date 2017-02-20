@@ -37,8 +37,12 @@ RadSideDrawer StackLayout {
     background-color: #e3e3e3;
 }
 
+RadSideDrawer StackLayout.main-panel {
+    background-color: #e3e3e3;
+}
+
 RadSideDrawer Image.header-image {
-    height: 120px;
+    height: 100px;
     width: auto;
     margin: 20px;
 }
@@ -48,7 +52,41 @@ AbsoluteLayout Image.menu-button {
     height: 48px;
 }
 
+.fa {
+    font-family: FontAwesome, fontawesome-webfont;
+}
+
 .viaje-button {
     width: 100px;
     height: 100px;
+}
+
+.fxbxcontainer {
+  align-items: center;
+  padding: 10px;
+  flex: 1 100%;
+}
+
+.fxbxrow {
+  background-color: yellow;
+  flex: 1 auto;
+  order: 1;
+}
+
+.fxbxDistancia {
+  background-color: red;
+  width: 50;
+  font-size: 14;
+  flex: 1 auto;
+  order: 1;
+}
+.fxbxVelocidad {
+  background-color: green;
+  flex: 1 auto;
+  order: 2;
+}
+.fxbxDuracion {
+  background-color: gray;
+  flex: 1 auto;
+  order: 3;
 }

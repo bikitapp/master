@@ -2,7 +2,7 @@
 
 project.ext {
     // Uncomment below to change Google Play Services Version
-    googlePlayServicesVersion = "9.8.+"
+    googlePlayServicesVersion = "10.2.+"
 }
 
 // Uncomment to add recyclerview-v7 dependency
@@ -14,8 +14,12 @@ android {
   defaultConfig {
     generatedDensities = []
     applicationId = "com.bikit.bikitapp"
+    multiDexEnabled true
   }
   aaptOptions {
     additionalParameters "--no-version-vectors"
+  }
+  dexOptions {
+    javaMaxHeapSize "4g"
   }
 }
