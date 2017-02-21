@@ -5,12 +5,17 @@ import { SIDEDRAWER_DIRECTIVES } from "nativescript-telerik-ui/sidedrawer/angula
 import { NgModule } from "@angular/core";
 import { mainmapRouting } from "./mainmap.routing";
 import { MapComponent } from "./map.component";
+//FoniconAwesome
+import { TNSFontIconModule } from 'nativescript-ngx-fonticon';
 
 @NgModule({
   imports: [
     NativeScriptModule,
     NativeScriptFormsModule,
-    mainmapRouting
+    mainmapRouting,
+    TNSFontIconModule.forRoot({
+            'fontawesome': 'font-awesome.css'
+        })
   ],
   declarations: [
     SIDEDRAWER_DIRECTIVES,

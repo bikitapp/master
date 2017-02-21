@@ -1,6 +1,7 @@
 import {Component, ViewChild, AfterViewInit} from '@angular/core';
 import {registerElement} from 'nativescript-angular/element-registry';
 import { Router } from "@angular/router";
+import { TNSFontIconService } from 'nativescript-ngx-fonticon';
 
 let geolocation = require('nativescript-geolocation');
 import {MapView, Marker, Polyline, Position} from 'nativescript-google-maps-sdk';

@@ -6,16 +6,16 @@
         </StackLayout>
         <StackLayout class="sidedrawer-content">
             <GridLayout  rows="auto" columns="auto,*" pageName="main-page">
-              <Label text="{{'fa-home' }}" class="fa sidedrawer-list-item-icon" row="0" col="0"> </Label>
+              <Label [text]="'fa-home' | fonticon" class="fa sidedrawer-list-item-icon" row="0" col="0"> </Label>
               <Label text="Home" class="sidedrawer-list-item-text" row="0" col="1"> </Label>
             </GridLayout>
-            <GridLayout rows="auto" columns="auto,*" pageName="basics">
-              <Label text="{{'fa-font'}}" class="fa sidedrawer-list-item-icon" row="0" col="0"> </Label>
-              <Label text="Basics" class="sidedrawer-list-item-text" row="0" col="1"> </Label>
-            </GridLayout>
             <GridLayout rows="auto" columns="auto,*" pageName="buttons">
-              <Label text="{{'fa-square'}}" class="fa sidedrawer-list-item-icon" row="0" col="0"> </Label>
-              <Label text="Buttons" class="sidedrawer-list-item-text" row="0" col="1"> </Label>
+              <Label [text]="'fa-bicycle' | fonticon" class="fa sidedrawer-list-item-icon" row="0" col="0"> </Label>
+              <Label text="Ver rutas" class="sidedrawer-list-item-text" row="0" col="1"> </Label>
+            </GridLayout>
+            <GridLayout rows="auto" columns="auto,*" pageName="basics">
+              <Label [text]="'fa-close' | fonticon" class="fa sidedrawer-list-item-icon" row="0" col="0"> </Label>
+              <Label text="Cerrar sesión" class="sidedrawer-list-item-text" row="0" col="1"> </Label>
             </GridLayout>
           </StackLayout>
     </StackLayout>

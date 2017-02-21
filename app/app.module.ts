@@ -13,6 +13,9 @@ import { setStatusBarColors, BackendService, LoginService } from "./shared";
 import { LoginModule } from "./pages/login/login.module";
 //import { GroceriesModule } from "./pages/groceries/groceries.module";
 import { MapModule } from "./pages/mainmap/mainmap.module";
+//FoniconAwesome
+import { TNSFontIconModule, TNSFontIconService } from 'nativescript-ngx-fonticon';
+TNSFontIconService.debug = true;
 
 setStatusBarColors();
 
@@ -46,7 +49,10 @@ if(platform.device.os === platform.platformNames.android) {
     NativeScriptRouterModule,
     NativeScriptRouterModule.forRoot(appRoutes),
     LoginModule,
-    MapModule
+    MapModule,
+    TNSFontIconModule.forRoot({
+            'fa': 'font-awesome.css'
+        })
   ],
   declarations: [
       //SIDEDRAWER_DIRECTIVES,
