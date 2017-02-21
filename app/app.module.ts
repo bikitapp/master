@@ -9,9 +9,9 @@ import { authProviders, appRoutes } from "./app.routing";
 
 //App Components
 import { AppComponent } from "./app.component";
-import { setStatusBarColors, BackendService, LoginService } from "./shared";
+import { setStatusBarColors } from "./shared";
+import { BackendService, FirebaseService, UtilsService } from "./services";
 import { LoginModule } from "./pages/login/login.module";
-//import { GroceriesModule } from "./pages/groceries/groceries.module";
 import { MapModule } from "./pages/mainmap/mainmap.module";
 //FoniconAwesome
 import { TNSFontIconModule, TNSFontIconService } from 'nativescript-ngx-fonticon';
@@ -28,9 +28,7 @@ if(application.ios) {
 var platform = require("platform");
 if(platform.device.os === platform.platformNames.android) {
     application.onLaunch = function(intent) {
-        // hook the onActivityCreated callback upon application launching
         application.android.onActivityCreated = function(activity) {
-            // apply the default theme once the Activity is created
             var id = activity.getResources().getIdentifier("AppTheme", "style", activity.getPackageName());
             activity.setTheme(id);
         }
@@ -40,7 +38,8 @@ if(platform.device.os === platform.platformNames.android) {
 @NgModule({
   providers: [
     BackendService,
-    LoginService,
+    FirebaseService,
+    UtilsService,
     authProviders
   ],
   imports: [
@@ -55,7 +54,6 @@ if(platform.device.os === platform.platformNames.android) {
         })
   ],
   declarations: [
-      //SIDEDRAWER_DIRECTIVES,
       AppComponent,
   ],
   bootstrap: [AppComponent]

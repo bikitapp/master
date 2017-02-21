@@ -1,7 +1,9 @@
 import {Component, ViewChild, AfterViewInit} from '@angular/core';
 import {registerElement} from 'nativescript-angular/element-registry';
 import { Router } from "@angular/router";
+import {RouterExtensions} from 'nativescript-angular/router/router-extensions';
 import { TNSFontIconService } from 'nativescript-ngx-fonticon';
+import {Observable} from 'rxjs/Observable';
 
 let geolocation = require('nativescript-geolocation');
 import {MapView, Marker, Polyline, Position} from 'nativescript-google-maps-sdk';
@@ -11,9 +13,9 @@ import {RadSideDrawer} from 'nativescript-telerik-ui/sidedrawer';
 import sideDrawerModule = require('nativescript-telerik-ui/sidedrawer');
 import {RadSideDrawerComponent, SideDrawerType} from 'nativescript-telerik-ui/sidedrawer/angular';
 import {Config} from "../../shared/config";
-import firebase = require("nativescript-plugin-firebase");
+import {BackendService, FirebaseService} from "../../services";
 
-import { LoginService, alert } from "../../shared";
+import { alert } from "../../shared";
 
 import {Color} from 'color';
 
@@ -35,7 +37,7 @@ registerElement('MapView', () => MapView);
 let vm;
 @Component({
     moduleId: module.id,
-    selector: 'map',
+    selector: 'gf-map',
     templateUrl: 'map.component.html',
     styleUrls: ['map.component.css'],
 })
@@ -48,14 +50,18 @@ export class MapComponent implements AfterViewInit {
     gpsMarker:any;
     centeredOnLocation:boolean = false;
 
+    public message$: Observable<any>;
+
     constructor(private router: Router,
       private page: Page,
-      private loginService: LoginService) {
+      private routerExtensions: RouterExtensions,
+      private firebaseService: FirebaseService) {
           vm = this;
     }
 
     ngOnInit() {
       this.page.actionBarHidden = true;
+      this.message$ = <any>this.firebaseService.getMyMessage();
     }
 
     @ViewChild(RadSideDrawerComponent) public drawerComponent: RadSideDrawerComponent;
@@ -227,9 +233,8 @@ export class MapComponent implements AfterViewInit {
         console.log('Camera changed: ' + JSON.stringify(event.camera));
     }
     logoff() {
-      Config.invalidateToken();
-      firebase.logout();
-      this.router.navigate(["/login"]);
+      this.firebaseService.logout();
+      this.routerExtensions.navigate(["/login"], { clearHistory: true } );
     }
 }
 

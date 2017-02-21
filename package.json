@@ -11,10 +11,10 @@
   "homepage": "http://www.bikit.cl",
   "nativescript": {
     "id": "com.bikit.bikitapp",
-    "tns-ios": {
+    "tns-android": {
       "version": "2.5.0"
     },
-    "tns-android": {
+    "tns-ios": {
       "version": "2.5.0"
     }
   },
