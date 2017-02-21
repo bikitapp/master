@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
 import { Router } from "@angular/router";
-import firebase = require("nativescript-plugin-firebase");
+import { FirebaseService } from "../../services";
 
 import { Color } from "color";
 import { connectionType, getConnectionType } from "connectivity";
@@ -9,13 +9,15 @@ import { View } from "ui/core/view";
 import { prompt } from "ui/dialogs";
 import { Page } from "ui/page";
 import { TextField } from "ui/text-field";
+import { RouterExtensions } from 'nativescript-angular/router/router-extensions';
 
-import { alert, setHintColor, LoginService, User } from "../../shared";
+import { alert, setHintColor, User } from "../../shared";
 
 @Component({
-  selector: "gr-login",
-  templateUrl: "pages/login/login.component.html",
-  styleUrls: ["pages/login/login-common.css", "pages/login/login.component.css"],
+  moduleId: module.id,
+  selector: "gf-login",
+  templateUrl: "login.component.html",
+  styleUrls: ["login-common.css", "login.component.css"],
 })
 export class LoginComponent implements OnInit {
   user: User;
@@ -34,8 +36,8 @@ export class LoginComponent implements OnInit {
   @ViewChild("nacimiento") nacimiento: ElementRef;
 
 
-  constructor(private router: Router,
-    private userService: LoginService,
+  constructor(private firebaseService: FirebaseService,
+              private routerExtensions: RouterExtensions,
     private page: Page) {
     this.user = new User();
     this.user.nombre;
@@ -72,10 +74,10 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-    this.userService.login(this.user)
+    this.firebaseService.login(this.user)
       .then(() => {
         this.isAuthenticating = false;
-        this.router.navigate(["/"]);
+        this.routerExtensions.navigate(["/"], { clearHistory: true });
       })
       .catch(() => {
         console.log("error con login por email " );
@@ -90,7 +92,7 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-    this.userService.register(this.user)
+    this.firebaseService.register(this.user)
       .then(
         () => {
           this.isAuthenticating = false;
@@ -98,7 +100,6 @@ export class LoginComponent implements OnInit {
           this.login();
         },
         (message) => {
-          // TODO: Verify this works
           if (message.match(/same user/)) {
             alert("Este correo electrónico ya está registrado.");
           } else if (message.match(/at least 6 characters/)) {
@@ -120,7 +121,7 @@ export class LoginComponent implements OnInit {
       cancelButtonText: "Cancelar"
     }).then((data) => {
       if (data.result) {
-        this.userService.resetPassword(data.text.trim())
+        this.firebaseService.resetPassword(data.text.trim())
           .then(() => {
             alert("Tu contraseña fue restaurada correctamente. Por favor revisa tu correo electrónico y sigue las instrucciones al elegir una nueva contraseña.");
           }, () => {
@@ -136,10 +137,10 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-    this.userService.googleLogin(this.user)
+    this.firebaseService.googleLogin(this.user)
       .then(() => {
         this.isAuthenticating = false;
-        this.router.navigate(["/"]);
+        this.routerExtensions.navigate(["/"], { clearHistory: true });
       })
       .catch(() => {
         console.log("error con login por google " );

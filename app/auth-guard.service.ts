@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Router, CanActivate } from "@angular/router";
 import {Config} from "./shared/config";
+import { BackendService } from "./services/backend.service";
 
 @Injectable()
 export class AuthGuard implements CanActivate {
@@ -8,7 +9,7 @@ export class AuthGuard implements CanActivate {
 
 canActivate() {
 
-  if (Config.hasActiveToken()) {
+  if (BackendService.isLoggedIn()) {
     console.log("usuario logueado")
     return true;
   }

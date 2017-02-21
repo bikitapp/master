@@ -15,7 +15,7 @@
             </GridLayout>
             <GridLayout rows="auto" columns="auto,*" pageName="basics">
               <Label [text]="'fa-close' | fonticon" class="fa sidedrawer-list-item-icon" row="0" col="0"> </Label>
-              <Label text="Cerrar sesión" class="sidedrawer-list-item-text" row="0" col="1"> </Label>
+              <Label text="Cerrar sesión" (tap)="logoff()" class="sidedrawer-list-item-text" row="0" col="1"> </Label>
             </GridLayout>
           </StackLayout>
     </StackLayout>

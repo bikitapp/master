@@ -74,7 +74,7 @@
 
     <StackLayout class="social-container" orientation="horizontal" horizontalAlignment="center" verticalAlignment="center" >
       <Image src="res://social_facebook" stretch="aspectFit" width="60" height="60" ></Image>
-      <Image src="res://social_googleplus" stretch="aspectFit" width="60" height="60" (tap)="googleLogin() " ></Image>
+      <Image src="res://social_googleplus" stretch="aspectFit" width="60" height="60" [isEnabled]="!isAuthenticating" (tap)="googleSignin() " ></Image>
       <!--Image src="res://social_twitter" stretch="aspectFit" width="60" height="60"  ></Image-->
 
     </StackLayout>
