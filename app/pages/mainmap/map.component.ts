@@ -48,7 +48,7 @@ export class MapComponent implements AfterViewInit {
     tapLine:Polyline;
     tapMarker:any;
     gpsMarker:any;
-    centeredOnLocation:boolean = false;
+    centeredOnLocation:boolean = true;
 
     public message$: Observable<any>;
 
@@ -232,6 +232,7 @@ export class MapComponent implements AfterViewInit {
     onCameraChanged(event) {
         console.log('Camera changed: ' + JSON.stringify(event.camera));
     }
+    
     logoff() {
       this.firebaseService.logout();
       this.routerExtensions.navigate(["/login"], { clearHistory: true } );
