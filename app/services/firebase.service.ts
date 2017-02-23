@@ -45,13 +45,12 @@ export class FirebaseService {
       });
   }
 
-  googleLogin(user: User) {
+  googleSignin(user: User) {
     return firebase.login({
       type: firebase.LoginType.GOOGLE
     }).then((result: any) => {
         BackendService.token = result.uid;
-        alert(JSON.stringify(result));
-        console.log("google login");
+        return JSON.stringify(result);
       },
       function (errorMessage:any) {
         console.log(errorMessage);

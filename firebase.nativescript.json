@@ -7,5 +7,5 @@
     "storage": true,
     "facebook_auth": false,
     "google_auth": true,
-    "admob": false
+    "admob": true
 }

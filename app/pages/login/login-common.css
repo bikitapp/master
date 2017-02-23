@@ -7,15 +7,14 @@
   background-image: url("res://bg_login");
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: center;
 }
 
 .initial-container {
-  margin-top: 170;
+  margin-top: 150;
 }
 .initial-logo {
   horizontal-align: center;
-  margin-bottom: 10;
+  margin-bottom: 40;
 }
 
 .initial-button {
@@ -24,10 +23,27 @@
   height: 45;
   width: 275;
   vertical-align: center;
+  margin-top: 20;
+  border-radius: 5;
 }
+
 .initial-button-label {
   horizontal-align: center;
-  font-weight: bold;
+  font-weight: normal;
+  font-size: 12;
+}
+
+.initial-button-google {
+  background-image: url("res://googlefavicon");
+  background-color: white;
+  color: grey;
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 45;
+  width: 275;
+  vertical-align: center;
+  margin-top: 20;
+  border-radius: 5;
 }
 
 .main-container {
@@ -37,20 +53,16 @@
   margin-right: 30;
 }
 
-.social-container{
-  margin-left: 30;
-  margin-right: 30;
-  width: 350;
-  height: 65;
-}
-
 .camposLogin {
 /* Rectangle 8: */
 background-color: rgba(0,0,0,0.30);
-border-radius: 3px;
+border-radius: 5;
+height: 45;
+width: 275;
+padding-left: 5;
+vertical-align: center;
 font-family: Roboto-Regular;
 color: rgba(255,255,255,0.80);
-
 }
 
 Image {
@@ -64,13 +76,21 @@ Button, TextField {
 .submit-button {
   background-color: #5FCF80;
   color: white;
+  height: 45;
+  width: 275;
+  vertical-align: center;
   margin-top: 20;
+  border-radius: 5;
 }
 
 .toogle-button {
   background-color: #637A91;
   color: white;
+  height: 45;
+  width: 275;
+  vertical-align: center;
   margin-top: 20;
+  border-radius: 5;
 }
 
 .forgot-password-label {
@@ -82,15 +102,6 @@ Button, TextField {
   text-align: center;
 }
 
-.social-singin-label {
-  font-size: 13;
-  margin-top: 10;
-  margin-left: 20;
-  margin-bottom: 5;
-  color: white;
-  text-align: center;
-}
-
 .sign-up-stack {
 
 }
@@ -98,7 +109,7 @@ Button, TextField {
 .sign-up-stack Label {
   color: white;
   horizontal-align: center;
-  font-size: 15;
+  font-size: 14;
 }
 
 .logo-container {

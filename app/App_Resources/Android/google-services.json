@@ -15,6 +15,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "1062457871967-a72ldursb9o8r13foka7m68236sg68uq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bikit.bikitapp",
+            "certificate_hash": "e685850e8c7a9405763141de4b966bcca39e4a93"
+          }
+        },
+        {
+          "client_id": "1062457871967-tkredl5hfa66s3puo5gdh5uevlbj7cf4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bikit.bikitapp",
+            "certificate_hash": "c4522bffd88e8a9c23b03ca847ac42c324296477"
+          }
+        },
+        {
           "client_id": "1062457871967-f98a2h4d64ebvjtjrkq52r0q7ljig14n.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,8 +45,20 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1062457871967-f98a2h4d64ebvjtjrkq52r0q7ljig14n.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1062457871967-m3vtvkkumtbreu4l2r078k48s51a9ncf.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.bikit.bikitapp"
+              }
+            }
+          ]
         },
         "ads_service": {
           "status": 2

@@ -3,9 +3,12 @@
   <GridLayout #background scaleX="1.4" scaleY="1.4" class="background" (loaded)="startBackgroundAnimation(background)"></GridLayout>
 
   <StackLayout #initialContainer class="initial-container">
-    <Image src="res://logo_login" stretch="none" class="initial-logo"></Image>
+    <Image src="res://logo_login" stretch="aspectFit" class="initial-logo" horizontalAlignment="center"></Image>
     <StackLayout (tap)="showMainContent()" class="initial-button">
-      <Label text="Ingresar" class="initial-button-label"></Label>
+      <Label text="Registro o Ingreso con correo" class="initial-button-label"></Label>
+    </StackLayout>
+    <StackLayout class="initial-button-google" [isEnabled]="!isAuthenticating" (tap)="googleSignin()" >
+      <Label text="Ingresa con Google" class="initial-button-label"> </Label>
     </StackLayout>
   </StackLayout>
 
@@ -69,15 +72,6 @@
     <Button [text]="isLoggingIn ? 'Registro' : 'Volver'" (tap)="toggleDisplay()"  class="toogle-button" ></Button>
 
     <Label class="forgot-password-label" text="¿Olvidaste tu contraseña?" (tap)="forgotPassword()" [opacity]="isLoggingIn ? 1 : 0" [visibility]="isLoggingIn ? 'visible' : 'collapse'" ></Label>
-
-    <Label class="social-singin-label" text="También puedes ingresar con tus cuentas de:" ></Label>
-
-    <StackLayout class="social-container" orientation="horizontal" horizontalAlignment="center" verticalAlignment="center" >
-      <Image src="res://social_facebook" stretch="aspectFit" width="60" height="60" ></Image>
-      <Image src="res://social_googleplus" stretch="aspectFit" width="60" height="60" [isEnabled]="!isAuthenticating" (tap)="googleSignin() " ></Image>
-      <!--Image src="res://social_twitter" stretch="aspectFit" width="60" height="60"  ></Image-->
-
-    </StackLayout>
 
     <StackLayout #signUpStack class="sign-up-stack">
 

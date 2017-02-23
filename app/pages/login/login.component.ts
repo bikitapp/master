@@ -131,13 +131,13 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  goolgeSignin() {
+  googleSignin() {
     if (getConnectionType() === connectionType.none) {
       alert("Bikit necesita estar conectado a internet para registrar.");
       return;
     }
 
-    this.firebaseService.googleLogin(this.user)
+    this.firebaseService.googleSignin(this.user)
       .then(() => {
         this.isAuthenticating = false;
         this.routerExtensions.navigate(["/"], { clearHistory: true });
@@ -239,7 +239,6 @@ export class LoginComponent implements OnInit {
 
       animations.push({ target: signupControls, translate: { x: 0, y: 0 }, opacity: 1, delay: 650, duration: 150 });
 
-      // Kick off the animation queue
       new Animation(animations, false).play();
     });
   }
@@ -259,7 +258,6 @@ export class LoginComponent implements OnInit {
 
       animations.push({ target: formControls, translate: { x: 0, y: 0 }, opacity: 1, delay: 650, duration: 150 });
 
-      // Kick off the animation queue
       new Animation(animations, false).play();
     });
   }

@@ -26,6 +26,19 @@
 	<string>LaunchScreen</string>
 	<key>UIRequiresFullScreen</key>
 	<true/>
+	<key>CFBundleURLTypes</key>
+	 <array>
+			 <dict>
+					 <key>CFBundleTypeRole</key>
+					 <string>Editor</string>
+					 <key>CFBundleURLName</key>
+					 <string>REVERSED_CLIENT_ID</string>
+					 <key>CFBundleURLSchemes</key>
+					 <array>
+							 <string>com.googleusercontent.apps.1062457871967-m3vtvkkumtbreu4l2r078k48s51a9ncf</string>
+					 </array>
+			 </dict>
+	 </array>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
@@ -33,17 +46,24 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>UIStatusBarStyle</key>
+  <string>UIStatusBarStyleLightContent</string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+	  <key>NSAllowsArbitraryLoads</key>
+	  <true/>
+	  <key>NSAllowsArbitraryLoadsForMedia</key>
+	  <true/>
+	  <key>NSAllowsArbitraryLoadsInWebContent</key>
+	  <true/>
+	</dict>
 </dict>
 </plist>

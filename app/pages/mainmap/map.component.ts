@@ -48,7 +48,7 @@ export class MapComponent implements AfterViewInit {
     tapLine:Polyline;
     tapMarker:any;
     gpsMarker:any;
-    centeredOnLocation:boolean = true;
+    centeredOnLocation:boolean = false;
 
     public message$: Observable<any>;
 
@@ -91,7 +91,7 @@ export class MapComponent implements AfterViewInit {
         if (geolocation.isEnabled()) {
             return geolocation.getCurrentLocation({
                 desiredAccuracy: 10,
-                updateDistance: 10,
+                updateDistance: 50,
                 minimumUpdateTime: 1000,
                 maximumAge: 20000
             })
@@ -122,24 +122,6 @@ export class MapComponent implements AfterViewInit {
             }, vm.error);
     };
 
-    mapTapped(event) {
-        console.log('Map Tapped');
-
-        vm.tapLine = vm.addPointToLine({
-            color: new Color('LightRed'),
-            line: vm.tapLine,
-            location: event.position,
-            geodesic: true,
-            width: 10
-        });
-
-        vm.removeMarker(vm.tapMarker);
-        vm.tapMarker = vm.addMarker({
-            location: event.position,
-            title: 'Tap Location'
-        });
-    };
-
     locationReceived(position:Position) {
         console.log('GPS Update Received');
 
@@ -155,7 +137,7 @@ export class MapComponent implements AfterViewInit {
             line: vm.gpsLine,
             location: position,
             geodesic: true,
-            width: 10
+            width: 12
         });
 
         vm.removeMarker(vm.gpsMarker);
@@ -201,14 +183,6 @@ export class MapComponent implements AfterViewInit {
         vm.closeDrawer();
     };
 
-    clearTapLine() {
-        vm.removeLine(vm.tapLine);
-        vm.tapLine = null;
-        vm.removeMarker(vm.tapMarker);
-        vm.tapMarker = null;
-        vm.closeDrawer();
-    }
-
     removeLine(line:Polyline) {
         if (line) {
             line.removeAllPoints();
@@ -216,8 +190,8 @@ export class MapComponent implements AfterViewInit {
     }
 
     removeMarker(marker:Marker) {
-        if (vm.mapView && marker) {
-            vm.mapView.removeMarker(marker);
+        if (this.mapView && marker) {
+            this.mapView.removeMarker(marker);
         }
     }
 
@@ -232,7 +206,7 @@ export class MapComponent implements AfterViewInit {
     onCameraChanged(event) {
         console.log('Camera changed: ' + JSON.stringify(event.camera));
     }
-    
+
     logoff() {
       this.firebaseService.logout();
       this.routerExtensions.navigate(["/login"], { clearHistory: true } );
