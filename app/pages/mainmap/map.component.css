@@ -1,60 +1,6 @@
-RadSideDrawer Label {
-    color: #4A4A4A;
-    font-size: 16px;
-    padding: 10px;
-    text-align: center;
-}
-
-RadSideDrawer Label.divider {
-    background-color: #4A4A4A;
-    width: 90%;
-    height: 1px;
-    padding: 10px;
-
-}
-
-RadSideDrawer Label.divider-vertical {
-    background-color: #4A4A4A;
-    height: 90%;
-    width: 1px;
-}
-
-RadSideDrawer Label.button-divider {
-    background-color: #004488;
-    width: 75%;
-    height: 1px;
-}
-
-RadSideDrawer Label.button {
-    background-color: none;
-    color: #4A4A4A;
-    font-size: 24;
-    text-align: center;
-    padding: 10px;
-}
-
-RadSideDrawer StackLayout {
-    background-color: #e3e3e3;
-}
-
-RadSideDrawer StackLayout.main-panel {
-    background-color: #e3e3e3;
-}
-
-RadSideDrawer Image.header-image {
-    height: 100px;
-    width: auto;
-    margin: 20px;
-}
-
-AbsoluteLayout Image.menu-button {
-    width: 48px;
-    height: 48px;
-}
-
 .fa {
     font-family: FontAwesome, fontawesome-webfont;
-    font-size: large;
+    font-size: 20;
 }
 
 .viaje-button {
@@ -63,31 +9,19 @@ AbsoluteLayout Image.menu-button {
 }
 
 .fxbxcontainer {
-  align-items: center;
-  padding: 10px;
-  flex: 1 100%;
+  background-color: white;
+  align-items: flex-start;
+  padding: 5;
+}
+
+.fxbxcolumn {
+  flex-direction: column;
+  flex-wrap: nowrap;
 }
 
 .fxbxrow {
-  background-color: yellow;
-  flex: 1 auto;
-  order: 1;
-}
-
-.fxbxDistancia {
-  background-color: red;
-  width: 50;
-  font-size: 14;
-  flex: 1 auto;
-  order: 1;
-}
-.fxbxVelocidad {
-  background-color: green;
-  flex: 1 auto;
-  order: 2;
-}
-.fxbxDuracion {
-  background-color: gray;
-  flex: 1 auto;
-  order: 3;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: flex-start;
+  margin-bottom: 10;
 }

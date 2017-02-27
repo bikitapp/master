@@ -13,8 +13,9 @@ import { setStatusBarColors } from "./shared";
 import { BackendService, FirebaseService, UtilsService } from "./services";
 import { LoginModule } from "./pages/login/login.module";
 import { MapModule } from "./pages/mainmap/mainmap.module";
+
 //FoniconAwesome
-import { TNSFontIconModule, TNSFontIconService } from 'nativescript-ngx-fonticon';
+import {TNSFontIconModule, TNSFontIconService, TNSFontIconPipe, TNSFontIconPurePipe} from 'nativescript-ngx-fonticon';
 TNSFontIconService.debug = true;
 
 setStatusBarColors();
@@ -48,10 +49,8 @@ if(platform.device.os === platform.platformNames.android) {
     NativeScriptRouterModule,
     NativeScriptRouterModule.forRoot(appRoutes),
     LoginModule,
-    MapModule,
-    TNSFontIconModule.forRoot({
-            'fa': 'font-awesome.css'
-        })
+    TNSFontIconModule.forRoot({'fa': 'font-awesome.css'}),
+    MapModule
   ],
   declarations: [
       AppComponent,

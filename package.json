@@ -11,10 +11,10 @@
   "homepage": "http://www.bikit.cl",
   "nativescript": {
     "id": "com.bikit.bikitapp",
-    "tns-ios": {
+    "tns-android": {
       "version": "2.5.0"
     },
-    "tns-android": {
+    "tns-ios": {
       "version": "2.5.0"
     }
   },
@@ -41,6 +41,7 @@
     "nativescript-ngx-fonticon": "^2.0.0",
     "nativescript-plugin-firebase": "^3.10.0",
     "nativescript-social-share": "^1.3.2",
+    "nativescript-statusbar": "^1.0.0",
     "nativescript-telerik-ui": "^1.6.0",
     "nativescript-theme-core": "^1.0.2",
     "nativescript-unit-test-runner": "^0.3.4",

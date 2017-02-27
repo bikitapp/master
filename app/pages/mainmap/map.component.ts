@@ -2,7 +2,6 @@ import {Component, ViewChild, AfterViewInit} from '@angular/core';
 import {registerElement} from 'nativescript-angular/element-registry';
 import { Router } from "@angular/router";
 import {RouterExtensions} from 'nativescript-angular/router/router-extensions';
-import { TNSFontIconService } from 'nativescript-ngx-fonticon';
 import {Observable} from 'rxjs/Observable';
 
 let geolocation = require('nativescript-geolocation');
@@ -14,8 +13,10 @@ import sideDrawerModule = require('nativescript-telerik-ui/sidedrawer');
 import {RadSideDrawerComponent, SideDrawerType} from 'nativescript-telerik-ui/sidedrawer/angular';
 import {Config} from "../../shared/config";
 import {BackendService, FirebaseService} from "../../services";
+import { TNSFontIconService } from 'nativescript-ngx-fonticon';
 
 import { alert } from "../../shared";
+import { setInterval, setTimeout, clearInterval } from "timer";
 
 import {Color} from 'color';
 
@@ -50,18 +51,19 @@ export class MapComponent implements AfterViewInit {
     gpsMarker:any;
     centeredOnLocation:boolean = false;
 
+    public counter = 0;
     public message$: Observable<any>;
 
     constructor(private router: Router,
       private page: Page,
+      private fonticon: TNSFontIconService,
       private routerExtensions: RouterExtensions,
-      private firebaseService: FirebaseService) {
-          vm = this;
-    }
+      private firebaseService: FirebaseService) {vm = this;}
+
 
     ngOnInit() {
-      this.page.actionBarHidden = true;
       this.message$ = <any>this.firebaseService.getMyMessage();
+      this.page.actionBarHidden = true;
     }
 
     @ViewChild(RadSideDrawerComponent) public drawerComponent: RadSideDrawerComponent;
@@ -78,6 +80,13 @@ export class MapComponent implements AfterViewInit {
     closeDrawer(){
         vm.drawer.closeDrawer();
     }
+
+    increase(args) {
+            let that = this;
+            setTimeout(function () {
+                that.counter++;
+            }, 1000);
+        }
 
     enableLocation() {
         if (!geolocation.isEnabled()) {
@@ -113,7 +122,7 @@ export class MapComponent implements AfterViewInit {
         vm.enableLocation()
             .then(vm.getLocation)
             .then(() => {
-                vm.watchId = geolocation.watchLocation(vm.locationReceived, vm.error, {
+                vm.watchId = geolocation.watchLocation(vm.locationNow, vm.error, {
                     desiredAccuracy: 10,
                     updateDistance: 10,
                     minimumUpdateTime: 20000,
@@ -121,6 +130,29 @@ export class MapComponent implements AfterViewInit {
                 });
             }, vm.error);
     };
+
+    startMonitor() {
+      console.log('Start monitoring trip');
+      vm.enableLocation()
+          .then(vm.getLocation)
+          .then(() => {
+              vm.watchId = geolocation.watchLocation(vm.locationReceived, vm.error, {
+                  desiredAccuracy: 10,
+                  updateDistance: 10,
+                  minimumUpdateTime: 20000,
+                  maximumAge: 200000
+              });
+          }, vm.error);
+    }
+
+    stopMonitor() {
+      console.log('Stop monitoring trip');
+      if (vm.watchId) {
+        geolocation.clearWatch(vm.watchId);
+        vm.removeLine(vm.gpsLine);
+        vm.gpsLine = null;
+    }
+    }
 
     locationReceived(position:Position) {
         console.log('GPS Update Received');
@@ -146,6 +178,24 @@ export class MapComponent implements AfterViewInit {
             title: 'Mi ubicación'
         });
     };
+
+    locationNow(position:Position) {
+        console.log('GPS Update Received');
+
+        if (vm.mapView && position && !vm.centeredOnLocation) {
+            vm.mapView.latitude = position.latitude;
+            vm.mapView.longitude = position.longitude;
+            vm.mapView.zoom = 16;
+            vm.centeredOnLocation = true;
+        }
+
+        vm.removeMarker(vm.gpsMarker);
+        vm.gpsMarker = vm.addMarker({
+            location: position,
+            title: 'Mi ubicación'
+        });
+    };
+
 
     addPointToLine(args:AddLineArgs) {
         if (!vm.mapView || !args || !args.location) return;

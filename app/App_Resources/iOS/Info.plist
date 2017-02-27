@@ -52,6 +52,8 @@
 		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 	</array>
+	<key>UIStatusBarStyleBlackTranslucent</key>
+	<true/>
 	<key>UIStatusBarStyle</key>
   <string>UIStatusBarStyleLightContent</string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>

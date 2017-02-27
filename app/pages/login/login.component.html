@@ -1,6 +1,6 @@
 <GridLayout>
 
-  <GridLayout #background scaleX="1.4" scaleY="1.4" class="background" (loaded)="startBackgroundAnimation(background)"></GridLayout>
+  <GridLayout #background scaleX="1.5" scaleY="1.5" class="background" (loaded)="startBackgroundAnimation(background)"></GridLayout>
 
   <StackLayout #initialContainer class="initial-container">
     <Image src="res://logo_login" stretch="aspectFit" class="initial-logo" horizontalAlignment="center"></Image>
@@ -13,6 +13,7 @@
   </StackLayout>
 
   <StackLayout #mainContainer class="main-container" >
+
     <AbsoluteLayout #logoContainer class="logo-container">
       <Image src="res://logo_login" stretch="aspectFit"></Image>
     </AbsoluteLayout>
@@ -37,16 +38,29 @@
     </GridLayout>
 
     <GridLayout #signupControls class="form-controls" rows="auto, auto, auto, auto" translateY="20">
-      <TextField #nombre hint="Nombre completo" class="camposLogin" returnKeyType="next" (returnPress)="focusPassword()" [(ngModel)]="user.nombre"
+      <TextField #nombre
+        hint="Nombre completo"
+        class="camposLogin"
+        returnKeyType="next"
+        (returnPress)="focusPassword()"
+        [(ngModel)]="user.nombre"
         [isEnabled]="!isAuthenticating"
         autocorrect="false"
         autocapitalizationType="none"
-        row="0"></TextField>
-      <TextField #email hint="Correo electrónico" class="camposLogin" keyboardType="email" returnKeyType="next" (returnPress)="focusPassword()" [(ngModel)]="user.email"
+        row="0">
+      </TextField>
+      <TextField #email
+        hint="Correo electrónico"
+        class="camposLogin"
+        keyboardType="email"
+        returnKeyType="next"
+        (returnPress)="focusPassword()"
+        [(ngModel)]="user.email"
         [isEnabled]="!isAuthenticating"
         autocorrect="false"
         autocapitalizationType="none"
-        row="1"></TextField>
+        row="1">
+      </TextField>
       <TextField #password
         hint="Password"
         class="camposLogin"
@@ -54,7 +68,8 @@
         returnKeyType="next"
         [(ngModel)]="user.password"
         [isEnabled]="!isAuthenticating"
-        row="2"></TextField>
+        row="2">
+      </TextField>
         <TextField #nacimiento
           hint="Cumpleaños"
           class="camposLogin"
@@ -63,9 +78,10 @@
           (returnPress)="submit()"
           [(ngModel)]="user.nacimiento"
           [isEnabled]="!isAuthenticating"
-          row="3"></TextField>
+          row="3">
+        </TextField>
 
-      <ActivityIndicator [busy]="isAuthenticating" rowSpan="2"></ActivityIndicator>
+      <ActivityIndicator [busy]="isAuthenticating" class="activity-indicator" rowSpan="2"></ActivityIndicator>
     </GridLayout>
 
     <Button [text]="isLoggingIn ? 'Login' : 'Registrate'" [isEnabled]="!isAuthenticating" class="submit-button" (tap)="submit()"></Button>

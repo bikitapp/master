@@ -1,6 +1,8 @@
 import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
 import { Router } from "@angular/router";
 import { FirebaseService } from "../../services";
+import { isIOS } from 'platform';
+import { topmost } from 'ui/frame';
 
 import { Color } from "color";
 import { connectionType, getConnectionType } from "connectivity";
@@ -48,6 +50,8 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.page.actionBarHidden = true;
+    //var page = topmost().currentPage;
+    this.page.backgroundSpanUnderStatusBar = true;
   }
 
   focusPassword() {
@@ -163,7 +167,7 @@ export class LoginComponent implements OnInit {
 
   startBackgroundAnimation(background) {
     background.animate({
-      scale: { x: 1.0, y: 1.0 },
+      scale: { x: 1.2, y: 1.2 },
       duration: 20000
     });
   }

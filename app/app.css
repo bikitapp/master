@@ -1,27 +1,14 @@
-@import url("~/platform.css");
 @import 'nativescript-theme-core/css/core.light.css';
 
 Page {
   font-size: 12;
 }
-.list-page {
-  background-image: url("res://bg_inner");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-}
-ActionBar {
-  background-color: black;
-  color: white;
-}
-TextField {
-  padding: 10;
-  font-size: 13;
-}
+
 .line-through {
   text-decoration: line-through;
 }
 
 .fa {
-    font-family: "FontAwesome";
+  font-family: FontAwesome, fontawesome-webfont;
+  font-size:20;
 }
