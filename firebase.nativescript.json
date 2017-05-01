@@ -5,7 +5,7 @@
     "messaging": true,
     "crash_reporting": true,
     "storage": true,
-    "facebook_auth": false,
+    "facebook_auth": true,
     "google_auth": true,
     "admob": true
 }

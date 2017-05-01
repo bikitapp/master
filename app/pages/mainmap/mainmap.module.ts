@@ -9,7 +9,6 @@ import { MapComponent } from "./map.component";
 import {TNSFontIconModule, TNSFontIconService, TNSFontIconPipe, TNSFontIconPurePipe} from 'nativescript-ngx-fonticon';
 TNSFontIconService.debug = true;
 
-
 @NgModule({
   imports: [
     NativeScriptModule,

@@ -9,8 +9,8 @@ import { TNSFontIconService } from 'nativescript-ngx-fonticon';
 })
 export class AppComponent {
     constructor(private fonticon: TNSFontIconService) {
-      var page = topmost().currentPage;
-      page.backgroundSpanUnderStatusBar = true;
+      //var page = topmost().currentPage;
+      //page.backgroundSpanUnderStatusBar = true;
     }
 
   }

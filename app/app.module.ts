@@ -6,19 +6,21 @@ import { NgModule } from "@angular/core";
 import { NativeScriptHttpModule } from "nativescript-angular/http";
 import { NativeScriptRouterModule } from "nativescript-angular/router";
 import { authProviders, appRoutes } from "./app.routing";
+import { Http } from "@angular/http";
+//import { TranslateModule, TranslateLoader, TranslateStaticLoader} from "ng2-translate";
 
 //App Components
 import { AppComponent } from "./app.component";
-import { setStatusBarColors } from "./shared";
+//import { setStatusBarColors } from "./shared";
 import { BackendService, FirebaseService, UtilsService } from "./services";
 import { LoginModule } from "./pages/login/login.module";
 import { MapModule } from "./pages/mainmap/mainmap.module";
 
 //FoniconAwesome
 import {TNSFontIconModule, TNSFontIconService, TNSFontIconPipe, TNSFontIconPurePipe} from 'nativescript-ngx-fonticon';
-TNSFontIconService.debug = true;
+TNSFontIconService.debug = false;
 
-setStatusBarColors();
+//setStatusBarColors();
 
 // iOS Google Maps API Key Setup
 declare var GMSServices: any;

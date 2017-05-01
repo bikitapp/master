@@ -7,7 +7,7 @@ import { BackendService } from "./services/backend.service";
 import firebase = require ("nativescript-plugin-firebase");
 
 firebase.init({
-  persist: false,
+  persist: true,
   iOSEmulatorFlush: true,
   onAuthStateChanged: (data: any) => {
     console.log(JSON.stringify(data))

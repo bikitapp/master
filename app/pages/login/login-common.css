@@ -67,6 +67,18 @@ TextField {
   border-radius: 5;
 }
 
+.initial-button-facebook {
+  background-color: #3B5998;
+  color: white;
+  background-repeat: no-repeat;
+  background-size: contain;
+  height: 45;
+  width: 275;
+  vertical-align: center;
+  margin-top: 20;
+  border-radius: 5;
+}
+
 .main-container {
   visibility: collapse;
   opacity: 0;

@@ -2,7 +2,10 @@
 @import 'nativescript-theme-core/scss/platforms/index.ios';
 
 // Place any CSS rules you want to apply only on iOS here
+.sidedrawer-header{
+  background-color: black;
+}
 .sidedrawer-header.image{
-  height: 32;
-  width: 32;
+  height: 20;
+  width: 20;
 }

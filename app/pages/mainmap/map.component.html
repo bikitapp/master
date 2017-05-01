@@ -1,14 +1,14 @@
-<RadSideDrawer #drawer drawerLocation="Left">
-    <StatusBar ios:barstyle="opaque"></StatusBar>
-    <ActionBar class="action-bar">
-    </ActionBar>
+<RadSideDrawer drawerLocation="Left">
+  <StackLayout sdkToggleNavButton>
+
+</StackLayout>
     <StackLayout tkDrawerContent class="sidedrawer-left">
-        <StackLayout class="sidedrawer-header">
-          <Image src="res://icon" cssClass="sidedrawer-header-image img-circle"></Image>
-          <Label text="Bikit" textWrap="true" class="sidedrawer-header-brand"></Label>
-        </StackLayout>
+        <GridLayout rows="auto" columns="auto,*" class="sidedrawer-header">
+          <Image src="res://icon" class="sidedrawer-header-image img-circle" row="0" col="0" ></Image>
+          <Label text="Nombre de usuario" textWrap="true" class="sidedrawer-header-brand" row="0" col="2" ></Label>
+        </GridLayout>
         <StackLayout class="sidedrawer-content sidedrawer-left">
-            <GridLayout  rows="auto" columns="auto,*" pageName="main-page">
+            <GridLayout rows="auto" columns="auto,*" pageName="main-page">
               <Label [text]="'fa-home' | fonticon" class="fa sidedrawer-list-item-icon" row="0" col="0"> </Label>
               <Label text="Home" class="sidedrawer-list-item-text" row="0" col="1"> </Label>
             </GridLayout>
@@ -24,35 +24,20 @@
     </StackLayout>
 
     <StackLayout tkMainContent>
-        <StackLayout width="100%" height="60%" cssClass="mapa">
+        <SearchBar #sb hint="Search" [text]="searchPhrase" (submit)="onSubmit(sb.text)"></SearchBar>
+        <AbsoluteLayout class="mapa">
             <MapView top="0" left="0" width="100%" height="100%" (mapReady)="onMapReady($event)"></MapView>
-            <Label top="0" left="0" width="2%" height="100%" text=" "></Label>
-        </StackLayout>
         <StackLayout>
-                <FlexboxLayout class="fxbxcontainer m-10">
-                    <FlexboxLayout class="fxbxcolumn">
-
-                        <FlexboxLayout class="fxbxrow" justifyContent="space-between">
-                            <Label class="h1 text-center" text="0.0"></Label>
-                            <Label class="h1 text-center" text="0.0"></Label>
-                            <Label class="h1 text-center" text="00:00"></Label>
-                        </FlexboxLayout>
-                        <FlexboxLayout class="fxbxrow" justifyContent="space-between">
-                            <Label class="footnote" text="DISTANCIA (KM)"></Label>
-                            <Label class="footnote" text="VELOCIDAD (KMH)"></Label>
-                            <Label class="footnote" text="DURACIÓN"></Label>
-                        </FlexboxLayout>
-                        <FlexboxLayout class="fxbxrow" justifyContent="space-between">
-                            <Label width="33%" text="00" class="h1" > </Label>
-                            <Button width="33%" [text]="'fa-bicycle' | fonticon" class="fa grey" (tap)="startMonitor()"></Button>
-                            <Label width="33%" text="00" class="h1" > </Label>
-                        </FlexboxLayout>
-                        <Button width="33%" [text]="'fa-hand-stop-o' | fonticon" class="fa red" (tap)="stopMonitor()" ></Button>
-                    </FlexboxLayout>
-
-                </FlexboxLayout>
-
+            <Button (tap)="toggleButton()" [text]="isMonitoring ? 'fa-stop' : 'fa-play' | fonticon" class="fa"></Button>
+            <StackLayout orientation="horizontal">
+              <Label text="Distancia recorrida: " class="label-indicador"></Label>
+              <Label [text]="lastLocation" class="label-indicador" id=distancelabel></Label>
             </StackLayout>
+
+        </StackLayout>
+
+      </AbsoluteLayout>
+
     </StackLayout>
 
 </RadSideDrawer>

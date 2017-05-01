@@ -59,6 +59,21 @@ export class FirebaseService {
     ).catch(this.handleErrors);
   }
 
+  facebookSignin(user: User) {
+    return firebase.login({
+      type: firebase.LoginType.FACEBOOK,
+      scope: ['public_profile', 'email'] // optional: defaults to ['public_profile', 'email']
+    }).then((result: any) => {
+        BackendService.token = result.uid;
+        return JSON.stringify(result);
+    },
+        function (errorMessage:any) {
+          console.log(errorMessage);
+        }
+    ).catch(this.handleErrors);
+  }
+  
+
   logout(){
     BackendService.token = "";
     firebase.logout();
@@ -76,9 +91,9 @@ export class FirebaseService {
     ).catch(this.handleErrors);
   }
 
-  /*getMyWishList(): Observable<any> {
+  /*getMyTrips(): Observable<any> {
     return new Observable((observer: any) => {
-      let path = 'Gifts';
+      let path = 'Trips';
 
         let onValueEvent = (snapshot: any) => {
           this.ngZone.run(() => {
@@ -187,7 +202,7 @@ export class FirebaseService {
     return firebase.remove("/Gifts/"+gift.id+"")
       .catch(this.handleErrors);
   }
-  */
+
   uploadFile(localPath: string, file?: any): Promise<any> {
       let filename = this.utils.getFilename(localPath);
       let remotePath = `${filename}`;
@@ -211,7 +226,7 @@ export class FirebaseService {
         function (errorMessage:any) {
           console.log(errorMessage);
         });
-}
+}*/
 
   handleErrors(error) {
     console.log(JSON.stringify(error));

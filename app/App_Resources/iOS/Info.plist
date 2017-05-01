@@ -67,5 +67,27 @@
 	  <key>NSAllowsArbitraryLoadsInWebContent</key>
 	  <true/>
 	</dict>
+	<key>CFBundleURLTypes</key>
+<array>
+  <dict>
+    <key>CFBundleURLSchemes</key>
+    <array>
+      <string>fb1456242957727357</string>
+    </array>
+  </dict>
+</array>
+<key>FacebookAppID</key>
+<string>1456242957727357</string>
+<key>FacebookDisplayName</key>
+<string>bikitapp</string>
+<key>LSApplicationQueriesSchemes</key>
+<array>
+  <string>fbapi</string>
+  <string>fb-messenger-api</string>
+  <string>fbauth2</string>
+  <string>fbshareextension</string>
+</array>
+<key>NSPhotoLibraryUsageDescription</key>
+  <string>Para tu foto de perfil</string>
 </dict>
 </plist>

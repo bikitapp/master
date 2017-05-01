@@ -5,9 +5,10 @@
 
 // Customize any of the theme’s variables here, for instance $btn-color: red;
 //ActionBar
-$ab-background: rgba(95, 207, 128, 0.5);
+$ab-background: rgba(95, 207, 128, 1);
 $ab-color: white;
 
+$side-drawer-background: white;
 // Import the theme’s main ruleset.
 @import 'nativescript-theme-core/scss/index';
 

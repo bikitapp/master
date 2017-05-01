@@ -154,6 +154,24 @@ export class LoginComponent implements OnInit {
 
   }
 
+  facebookSignin() {
+    if (getConnectionType() === connectionType.none) {
+      alert("Bikit necesita estar conectado a internet para registrar.");
+      return;
+  }
+
+      this.firebaseService.facebookSignin(this.user)
+        .then(() => {
+          this.isAuthenticating = false;
+          this.routerExtensions.navigate(["/"], { clearHistory: true });
+        })
+        .catch(() => {
+          console.log("error con login por facebook " );
+          alert("Desafortunadamente no pudimos crear tu cuenta.");
+          this.isAuthenticating = false;
+      });
+    }
+
   toggleDisplay() {
     this.isLoggingIn = !this.isLoggingIn;
     if (this.isLoggingIn) {

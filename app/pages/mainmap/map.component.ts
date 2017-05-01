@@ -1,10 +1,15 @@
-import {Component, ViewChild, AfterViewInit} from '@angular/core';
+import {Component, ViewChild, AfterViewInit, NgZone} from '@angular/core';
 import {registerElement} from 'nativescript-angular/element-registry';
 import { Router } from "@angular/router";
 import {RouterExtensions} from 'nativescript-angular/router/router-extensions';
-import {Observable} from 'rxjs/Observable';
+//import {Observable} from 'rxjs/Observable';
+import {Observable, EventData} from "data/observable";
+import {ObservableArray} from "data/observable-array";
+var imageSource = require('tns-core-modules/image-source/image-source');
 
-let geolocation = require('nativescript-geolocation');
+import geolocation = require('nativescript-geolocation');
+//import { Location, enableLocationRequest, watchLocation, clearWatch } from "nativescript-geolocation";
+
 import {MapView, Marker, Polyline, Position} from 'nativescript-google-maps-sdk';
 
 import {Page} from "ui/page";
@@ -20,20 +25,12 @@ import { setInterval, setTimeout, clearInterval } from "timer";
 
 import {Color} from 'color';
 
-import {
-    FlexboxLayout,
-    FlexDirection,
-    FlexWrap,
-    JustifyContent,
-    AlignItems,
-    AlignContent,
-    AlignSelf
-} from "ui/layouts/flexbox-layout";
-
+import { FlexboxLayout, FlexDirection, FlexWrap, JustifyContent, AlignItems, AlignContent, AlignSelf} from "ui/layouts/flexbox-layout";
 
 var style = require("./mapstyle.json");
 
 registerElement('MapView', () => MapView);
+registerElement("Fab", () => require("nativescript-floatingactionbutton").Fab);
 
 let vm;
 @Component({
@@ -42,6 +39,7 @@ let vm;
     templateUrl: 'map.component.html',
     styleUrls: ['map.component.css'],
 })
+
 export class MapComponent implements AfterViewInit {
     mapView:any = null;
     watchId:number = null;
@@ -51,18 +49,29 @@ export class MapComponent implements AfterViewInit {
     gpsMarker:any;
     centeredOnLocation:boolean = false;
 
-    public counter = 0;
-    public message$: Observable<any>;
+    //public message$: Observable<any>;
+    public isMonitoring = false;
+    public monitorSpeed: string = "0";
+    public distance:number = 0;
+    public lastLocation:any;
+    private _locations: ObservableArray<geolocation.Location>;
+
+    public get locations(): ObservableArray<geolocation.Location> {
+        if (!this._locations) {
+            this._locations = new ObservableArray<geolocation.Location>();
+        }
+        return this._locations;
+    }
 
     constructor(private router: Router,
       private page: Page,
       private fonticon: TNSFontIconService,
       private routerExtensions: RouterExtensions,
-      private firebaseService: FirebaseService) {vm = this;}
-
+      private firebaseService: FirebaseService)
+      {vm = this;}
 
     ngOnInit() {
-      this.message$ = <any>this.firebaseService.getMyMessage();
+      //this.message$ = <any>this.firebaseService.getMyMessage();
       this.page.actionBarHidden = true;
     }
 
@@ -81,13 +90,6 @@ export class MapComponent implements AfterViewInit {
         vm.drawer.closeDrawer();
     }
 
-    increase(args) {
-            let that = this;
-            setTimeout(function () {
-                that.counter++;
-            }, 1000);
-        }
-
     enableLocation() {
         if (!geolocation.isEnabled()) {
             return geolocation.enableLocationRequest();
@@ -98,17 +100,18 @@ export class MapComponent implements AfterViewInit {
 
     getLocation() {
         if (geolocation.isEnabled()) {
-            return geolocation.getCurrentLocation({
-                desiredAccuracy: 10,
-                updateDistance: 50,
+            var location = geolocation.getCurrentLocation({
+                timeout: 500,
+                desiredAccuracy: 7,
+                updateDistance: 20,
                 minimumUpdateTime: 1000,
                 maximumAge: 20000
             })
+            return location;
         }
         return Promise.reject('GPS no habilitado.');
     }
 
-    //Map events
     onMapReady(event) {
         console.log('Map Ready');
         if (vm.mapView || !event.object) return;
@@ -118,32 +121,42 @@ export class MapComponent implements AfterViewInit {
         vm.mapView.markerSelect = vm.onMarkerSelect;
         vm.mapView.cameraChanged = vm.onCameraChanged;
         vm.mapView.setStyle( style );
-
         vm.enableLocation()
-            .then(vm.getLocation)
-            .then(() => {
+        .then(() => {
                 vm.watchId = geolocation.watchLocation(vm.locationNow, vm.error, {
-                    desiredAccuracy: 10,
-                    updateDistance: 10,
-                    minimumUpdateTime: 20000,
-                    maximumAge: 200000
+                    desiredAccuracy: 7,
+                    updateDistance: 5,
+                    minimumUpdateTime: 2000,
+                    maximumAge: 200
                 });
             }, vm.error);
     };
 
     startMonitor() {
-      console.log('Start monitoring trip');
+      console.log('Monitoring trip');
       vm.enableLocation()
           .then(vm.getLocation)
           .then(() => {
+              //vm.watchId = geolocation.watchLocation((locationReceived) => {
+                    //vm.updateDistance(locationReceived);
+                    //vm.distance = vm.distance + geolocation.distance(locationReceived, vm.lastLocation);
+                    //vm.lastLocation = locationReceived;
+                    //vm._page.getViewById("distanceLabel").android.setText(vm.getDistanceFormatted());
+                    //console.log("distancia recorrida:" + vm.distance);
+                //},
+                //function(e){
+                //    console.log("Error: " + e.message);
+                //},
+                //{ desiredAccuracy: 7, updateDistance: 1, minimumUpdateTime: 1000 })
               vm.watchId = geolocation.watchLocation(vm.locationReceived, vm.error, {
-                  desiredAccuracy: 10,
-                  updateDistance: 10,
-                  minimumUpdateTime: 20000,
-                  maximumAge: 200000
+                  desiredAccuracy: 7,
+                  updateDistance: 5,
+                  minimumUpdateTime: 2000,
+                  maximumAge: 200
               });
           }, vm.error);
-    }
+  }
+
 
     stopMonitor() {
       console.log('Stop monitoring trip');
@@ -155,7 +168,7 @@ export class MapComponent implements AfterViewInit {
     }
 
     locationReceived(position:Position) {
-        console.log('GPS Update Received');
+        console.log('GPS Update Received: ' + position.latitude , position.longitude);
 
         if (vm.mapView && position && !vm.centeredOnLocation) {
             vm.mapView.latitude = position.latitude;
@@ -171,16 +184,17 @@ export class MapComponent implements AfterViewInit {
             geodesic: true,
             width: 12
         });
-
+        vm.mapView.cameraChanged = vm.onCameraChanged;
+        this.lastLocation = position.latitude;
         vm.removeMarker(vm.gpsMarker);
         vm.gpsMarker = vm.addMarker({
             location: position,
-            title: 'Mi ubicación'
+            title: 'Mi ubicación',
         });
     };
 
     locationNow(position:Position) {
-        console.log('GPS Update Received');
+        console.log("GPS Update Received" + position.latitude, position.longitude);
 
         if (vm.mapView && position && !vm.centeredOnLocation) {
             vm.mapView.latitude = position.latitude;
@@ -192,10 +206,9 @@ export class MapComponent implements AfterViewInit {
         vm.removeMarker(vm.gpsMarker);
         vm.gpsMarker = vm.addMarker({
             location: position,
-            title: 'Mi ubicación'
+            title: 'Mi ubicación',
         });
     };
-
 
     addPointToLine(args:AddLineArgs) {
         if (!vm.mapView || !args || !args.location) return;
@@ -221,7 +234,8 @@ export class MapComponent implements AfterViewInit {
         let marker = new Marker();
         marker.position = Position.positionFromLatLng(args.location.latitude, args.location.longitude);
         marker.title = args.title;
-        marker.snippet = args.title;
+        //marker.icon = args.icon;
+
         vm.mapView.addMarker(marker);
 
         return marker;
@@ -245,6 +259,23 @@ export class MapComponent implements AfterViewInit {
         }
     }
 
+    updateDistance(locationReceived) {
+      vm.distance = vm.distance + geolocation.distance(vm.lastLocation, vm.locationReceived);
+      vm.lastLocation = vm.locationReceived;
+      //vm._page.getViewById("distanceLabel").android.setText(vm.getDistanceFormatted());
+      console.log("distancia recorrida:" + vm.distance);
+    }
+
+    toggleButton() {
+      this.isMonitoring = !this.isMonitoring;
+      if (this.isMonitoring) {
+              this.startMonitor();
+          } else {
+              this.stopMonitor();
+          }
+
+    }
+
     error(err) {
         console.log('Error: ' + JSON.stringify(err));
     }
@@ -255,6 +286,7 @@ export class MapComponent implements AfterViewInit {
 
     onCameraChanged(event) {
         console.log('Camera changed: ' + JSON.stringify(event.camera));
+        vm.centeredOnLocation = true;
     }
 
     logoff() {
@@ -274,4 +306,5 @@ export class AddLineArgs {
 export class AddMarkerArgs {
     public location:Position;
     public title:string;
+    public icon:any;
 }

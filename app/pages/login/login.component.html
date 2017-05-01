@@ -10,6 +10,9 @@
     <StackLayout class="initial-button-google" [isEnabled]="!isAuthenticating" (tap)="googleSignin()" >
       <Label text="Ingresa con Google" class="initial-button-label"> </Label>
     </StackLayout>
+    <StackLayout class="initial-button-facebook" [isEnabled]="!isAuthenticating" (tap)="facebookSignin()" >
+      <Label text="Ingresa con Facebook" class="initial-button-label"> </Label>
+    </StackLayout>
   </StackLayout>
 
   <StackLayout #mainContainer class="main-container" >
